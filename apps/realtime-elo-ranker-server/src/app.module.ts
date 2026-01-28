@@ -1,15 +1,18 @@
 import { Module } from '@nestjs/common';
-import { RouterModule } from '@nestjs/core';
-import { CatsModule } from './cats/cats.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { RankingModule } from './ranking/ranking.module';
+import { Player } from './ranking/entities/player.entity';
+import { Match } from './ranking/entities/match.entity';
 
 @Module({
   imports: [
-    RouterModule.register([
-      {
-        path: '/cats',
-        module: CatsModule,
-      },
-    ]),
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'database.sqlite',
+      entities: [Player, Match],
+      synchronize: true,
+    }),
+    RankingModule,
   ],
 })
 export class AppModule {}

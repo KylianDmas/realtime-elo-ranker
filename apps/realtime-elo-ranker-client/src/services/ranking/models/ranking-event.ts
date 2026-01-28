@@ -1,7 +1,11 @@
-import { RankingUpdate } from "./ranking-update";
-
 export enum RankingEventType {
-  RankingUpdate = "RankingUpdate"
+  RankingUpdate = "RankingUpdate",
+  MatchUpdate = "MatchUpdate",
+  ResetUpdate = "ResetUpdate"
 }
 
-export type RankingEvent = RankingUpdate | { type: "Error" } & Error;
+export type RankingEvent = 
+  | { type: RankingEventType.RankingUpdate; player: { id: string; rank: number } }
+  | { type: RankingEventType.MatchUpdate; match: any }
+  | { type: RankingEventType.ResetUpdate }
+  | ({ type: "Error" } & Error);

@@ -6,26 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.RankingModule = void 0;
 const common_1 = require("@nestjs/common");
+const ranking_service_1 = require("./ranking.service");
+const ranking_controller_1 = require("./ranking.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const ranking_module_1 = require("./ranking/ranking.module");
-const player_entity_1 = require("./ranking/entities/player.entity");
-const match_entity_1 = require("./ranking/entities/match.entity");
-let AppModule = class AppModule {
+const player_entity_1 = require("./entities/player.entity");
+const match_entity_1 = require("./entities/match.entity");
+let RankingModule = class RankingModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.RankingModule = RankingModule;
+exports.RankingModule = RankingModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'sqlite',
-                database: 'database.sqlite',
-                entities: [player_entity_1.Player, match_entity_1.Match],
-                synchronize: true,
-            }),
-            ranking_module_1.RankingModule,
-        ],
+        imports: [typeorm_1.TypeOrmModule.forFeature([player_entity_1.Player, match_entity_1.Match])],
+        controllers: [ranking_controller_1.RankingController],
+        providers: [ranking_service_1.RankingService],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], RankingModule);
+//# sourceMappingURL=ranking.module.js.map
