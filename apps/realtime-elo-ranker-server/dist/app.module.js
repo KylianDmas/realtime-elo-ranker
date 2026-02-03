@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const schedule_1 = require("@nestjs/schedule");
 const ranking_module_1 = require("./ranking/ranking.module");
 const player_entity_1 = require("./ranking/entities/player.entity");
 const match_entity_1 = require("./ranking/entities/match.entity");
@@ -19,11 +20,14 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
-                type: 'sqlite',
-                database: 'database.sqlite',
+                type: 'sqljs',
+                autoSave: true,
+                location: 'database.sqlite',
+                useLocalForage: false,
                 entities: [player_entity_1.Player, match_entity_1.Match],
                 synchronize: true,
             }),
+            schedule_1.ScheduleModule.forRoot(),
             ranking_module_1.RankingModule,
         ],
     })

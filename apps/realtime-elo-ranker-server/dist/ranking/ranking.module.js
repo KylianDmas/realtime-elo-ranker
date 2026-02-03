@@ -8,9 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RankingModule = void 0;
 const common_1 = require("@nestjs/common");
-const ranking_service_1 = require("./ranking.service");
-const ranking_controller_1 = require("./ranking.controller");
 const typeorm_1 = require("@nestjs/typeorm");
+const ranking_controller_1 = require("./ranking.controller");
+const ranking_service_1 = require("./ranking.service");
+const auto_match_service_1 = require("./auto-match.service");
 const player_entity_1 = require("./entities/player.entity");
 const match_entity_1 = require("./entities/match.entity");
 let RankingModule = class RankingModule {
@@ -20,7 +21,7 @@ exports.RankingModule = RankingModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([player_entity_1.Player, match_entity_1.Match])],
         controllers: [ranking_controller_1.RankingController],
-        providers: [ranking_service_1.RankingService],
+        providers: [ranking_service_1.RankingService, auto_match_service_1.AutoMatchService],
     })
 ], RankingModule);
 //# sourceMappingURL=ranking.module.js.map
