@@ -1,5 +1,8 @@
-import * as crypto from 'node:crypto';
-(global as any).crypto = crypto;
+// Règle problème de version de node
+if (!global.crypto) {
+  const crypto = require('node:crypto');
+  (global as any).crypto = crypto;
+}
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
